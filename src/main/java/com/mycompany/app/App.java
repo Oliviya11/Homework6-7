@@ -4,9 +4,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mitinyova.entities.Lecturer;
+import com.mitinyova.entities.Student;
 import com.mitinyova.entities.Subject;
 import com.mitinyova.workers.LecturersWorker;
+import com.mitinyova.workers.StudentsWorker;
 import com.mitinyova.workers.SubjectsWorker;
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
 
 public class App 
 {
@@ -14,6 +19,16 @@ public class App
     {
     	ApplicationContext context = 
     			new ClassPathXmlApplicationContext("SpringBeans.xml");
+    	CacheManager cm = new CacheManager();
+        Cache cache = cm.getCache("studentsCache");
+        System.out.println(cache.getName());
+        System.out.println(cache.getDiskStoreSize());
+        StudentsWorker worker = (StudentsWorker)context.getBean("students-worker");
+        Student student = worker.getStudentFromDbById(1);
+        System.out.println(student);
+        student = worker.getStudentFromDbById(1);
+        System.out.println(student);
+        /*
     	Lecturer lecturer = new Lecturer();
     	lecturer.setName("Vasiliy Ivanenko");
     	LecturersWorker workerLecturer = (LecturersWorker)context.getBean("lecturer-worker");
@@ -27,5 +42,6 @@ public class App
         subject.setLecturer(lecturer);
         SubjectsWorker workerSubject = (SubjectsWorker)context.getBean("subject-worker");
         workerSubject.addSubject(subject);
+        */
     }
 }
