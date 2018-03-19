@@ -6,11 +6,12 @@ import java.sql.SQLException;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.googlecode.ehcache.annotations.Cacheable;
 import com.mitinyova.entities.Student;
 import com.mitinyova.interfaces.StudentsDao;
-
+@Repository
 public class StudentsDaoImpl implements StudentsDao{
 	private static final String SQL_INSERT_STUDENT = "insert into students (pib,course) values (?,?)";
 	private static final String SQL_SELECT_STUDENT_BY_ID = "select id, pib, course from students where id = ?";

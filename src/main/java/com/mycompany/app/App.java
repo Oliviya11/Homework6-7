@@ -19,11 +19,13 @@ public class App
     {
     	ApplicationContext context = 
     			new ClassPathXmlApplicationContext("SpringBeans.xml");
+    	StudentsWorker worker = (StudentsWorker)context.getBean("students-worker");
+    	Student studentSave = new Student("Vasya", 4);
+    	worker.saveStudentToDb(studentSave);
     	CacheManager cm = new CacheManager();
         Cache cache = cm.getCache("studentsCache");
         System.out.println(cache.getName());
         System.out.println(cache.getDiskStoreSize());
-        StudentsWorker worker = (StudentsWorker)context.getBean("students-worker");
         Student student = worker.getStudentFromDbById(1);
         System.out.println(student);
         student = worker.getStudentFromDbById(1);
