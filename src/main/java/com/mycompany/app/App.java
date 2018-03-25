@@ -19,6 +19,7 @@ public class App
     {
     	ApplicationContext context = 
     			new ClassPathXmlApplicationContext("SpringBeans.xml");
+    	/*
     	StudentsWorker worker = (StudentsWorker)context.getBean("students-worker");
     	Student studentSave = new Student("Vasya", 4);
     	worker.saveStudentToDb(studentSave);
@@ -30,7 +31,8 @@ public class App
         System.out.println(student);
         student = worker.getStudentFromDbById(1);
         System.out.println(student);
-        /*
+        */
+    	
     	Lecturer lecturer = new Lecturer();
     	lecturer.setName("Vasiliy Ivanenko");
     	LecturersWorker workerLecturer = (LecturersWorker)context.getBean("lecturer-worker");
@@ -44,6 +46,6 @@ public class App
         subject.setLecturer(lecturer);
         SubjectsWorker workerSubject = (SubjectsWorker)context.getBean("subject-worker");
         workerSubject.addSubject(subject);
-        */
+        workerSubject.saveSubject(subject);
     }
 }
